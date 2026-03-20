@@ -72,39 +72,7 @@ export default function Dashboard({ onShare, onNewProject }) {
         ))}
       </div>
 
-      {/* Progress Overview */}
-      <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-surface-700/30">
-        <div className="flex items-center justify-between mb-3 sm:mb-4">
-          <h2 className="text-base sm:text-lg font-semibold text-surface-200 flex items-center gap-2">
-            <TrendingUp size={16} className="text-primary-400" />
-            Progreso Global
-          </h2>
-          <span className="text-xl sm:text-2xl font-bold gradient-text">{globalProgress}%</span>
-        </div>
-        <div className="w-full h-2.5 sm:h-3 bg-surface-700/50 rounded-full overflow-hidden">
-          <div className="h-full rounded-full gradient-primary transition-all duration-700 ease-out" style={{ width: `${globalProgress}%` }} />
-        </div>
-        <div className="flex justify-between mt-2 text-[10px] sm:text-[11px] text-surface-500">
-          <span>{doneTasks} completadas</span>
-          <span>{totalTasks - doneTasks} pendientes</span>
-        </div>
-      </div>
-
-      {/* Charts */}
-      <div>
-        <h2 className="text-base sm:text-lg font-semibold text-surface-200 mb-3 sm:mb-4 flex items-center gap-2">
-          <BarChart3 size={16} className="text-primary-400" />
-          Gráficas
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-          <TasksByStatusChart />
-          <TasksByPriorityChart />
-          <ProjectComparisonChart />
-          <OverdueChart />
-        </div>
-      </div>
-
-      {/* Project Cards (below charts) */}
+      {/* Project Cards (ABOVE progress bar) */}
       <div>
         <div className="flex items-center justify-between mb-3 sm:mb-4">
           <h2 className="text-base sm:text-lg font-semibold text-surface-200 flex items-center gap-2">
@@ -174,7 +142,7 @@ export default function Dashboard({ onShare, onNewProject }) {
                   {stats.total > 0 && (
                     <>
                       <div className="bg-emerald-500 rounded-full transition-all duration-500" style={{ width: `${(stats.done / stats.total) * 100}%` }} />
-                      <div className="bg-primary-500 rounded-full transition-all duration-500" style={{ width: `${(stats.inProgress / stats.total) * 100}%` }} />
+                      <div className="bg-violet-500 rounded-full transition-all duration-500" style={{ width: `${(stats.inProgress / stats.total) * 100}%` }} />
                     </>
                   )}
                 </div>
@@ -186,6 +154,41 @@ export default function Dashboard({ onShare, onNewProject }) {
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* Progress Overview (below projects) */}
+      <div className="glass rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-surface-700/30">
+        <div className="flex items-center justify-between mb-3 sm:mb-4">
+          <h2 className="text-base sm:text-lg font-semibold text-surface-200 flex items-center gap-2">
+            <TrendingUp size={16} className="text-primary-400" />
+            Progreso Global
+          </h2>
+          <span className="text-xl sm:text-2xl font-bold text-violet-400">{globalProgress}%</span>
+        </div>
+        <div className="w-full h-2.5 sm:h-3 bg-surface-700/50 rounded-full overflow-hidden">
+          <div
+            className="h-full rounded-full bg-violet-500 transition-all duration-700 ease-out"
+            style={{ width: `${globalProgress}%` }}
+          />
+        </div>
+        <div className="flex justify-between mt-2 text-[10px] sm:text-[11px] text-surface-500">
+          <span>{doneTasks} completadas</span>
+          <span>{totalTasks - doneTasks} pendientes</span>
+        </div>
+      </div>
+
+      {/* Charts */}
+      <div>
+        <h2 className="text-base sm:text-lg font-semibold text-surface-200 mb-3 sm:mb-4 flex items-center gap-2">
+          <BarChart3 size={16} className="text-primary-400" />
+          Gráficas
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+          <TasksByStatusChart />
+          <TasksByPriorityChart />
+          <ProjectComparisonChart />
+          <OverdueChart />
         </div>
       </div>
     </div>
